@@ -1,0 +1,70 @@
+<div class="tel">
+    <div class="identification" *ngIf="isAuth != true">
+        <mat-form-field appearance="fill">
+            <mat-label>Ton nom :</mat-label>
+            <input [(ngModel)]="nom" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Couleur</mat-label>
+            <mat-select
+            [(ngModel)]="couleur"
+            [class.green]="couleur == 'v'"
+            [class.blue]="couleur == 'b'"
+            [class.yellow]="couleur == 'j'"
+            [class.red]="couleur == 'r'">
+              <mat-option value="v">Vert</mat-option>
+              <mat-option value="b">Bleu</mat-option>
+              <mat-option value="j">Jaune</mat-option>
+              <mat-option value="r">Rouge</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button [disabled]="couleur == null || nom == null || nom == ''" mat-raised-button color="primary" (click)="auth()">Se connecter</button>
+    </div>
+    <div class="formulaire" *ngIf="isAuth == true" 
+        [class.green]="couleur == 'v'"
+        [class.blue]="couleur == 'b'"
+        [class.yellow]="couleur == 'j'"
+        [class.red]="couleur == 'r'">
+        <h1>Feuille d'ordres de <strong 
+            [class.green]="couleur == 'v'"
+            [class.blue]="couleur == 'b'"
+            [class.yellow]="couleur == 'j'"
+            [class.red]="couleur == 'r'">{{nom | titlecase}}</strong></h1>
+        <table>
+            <tr>
+                <th>Pièce</th>
+                <th>Départ</th>
+                <th>Arrivée</th>
+            </tr>
+            <tr>
+                <td><input type="text" [ngModel]="ordre1a | uppercase " (ngModelChange)="ordre1a=$event"></td>
+                <td><input type="text" [ngModel]="ordre1b | uppercase " (ngModelChange)="ordre1b=$event"></td>
+                <td><input type="text" [ngModel]="ordre1c | uppercase " (ngModelChange)="ordre1c=$event"></td>
+            </tr>
+            <tr>
+                <td><input type="text" [ngModel]="ordre2a | uppercase " (ngModelChange)="ordre2a=$event"></td>
+                <td><input type="text" [ngModel]="ordre2b | uppercase " (ngModelChange)="ordre2b=$event"></td>
+                <td><input type="text" [ngModel]="ordre2c | uppercase " (ngModelChange)="ordre2c=$event"></td>
+            </tr>
+            <tr>
+                <td><input type="text" [ngModel]="ordre3a | uppercase " (ngModelChange)="ordre3a=$event"></td>
+                <td><input type="text" [ngModel]="ordre3b | uppercase " (ngModelChange)="ordre3b=$event"></td>
+                <td><input type="text" [ngModel]="ordre3c | uppercase " (ngModelChange)="ordre3c=$event"></td>
+            </tr>
+            <tr>
+                <td><input type="text" [ngModel]="ordre4a | uppercase " (ngModelChange)="ordre4a=$event"></td>
+                <td><input type="text" [ngModel]="ordre4b | uppercase " (ngModelChange)="ordre4b=$event"></td>
+                <td><input type="text" [ngModel]="ordre4c | uppercase " (ngModelChange)="ordre4c=$event"></td>
+            </tr>
+            <tr>
+                <td><input type="text" [ngModel]="ordre5a | uppercase " (ngModelChange)="ordre5a=$event"></td>
+                <td><input type="text" [ngModel]="ordre5b | uppercase " (ngModelChange)="ordre5b=$event"></td>
+                <td><input type="text" [ngModel]="ordre5c | uppercase " (ngModelChange)="ordre5c=$event"></td>
+            </tr>
+        </table>
+        <div class="boutons">
+            <button mat-raised-button color="primary" (click)="onSave()">Envoyer les ordres</button>
+            <button mat-raised-button color="warn" (click)="reset()">Vider les champs</button>
+        </div>
+    </div>
+</div>

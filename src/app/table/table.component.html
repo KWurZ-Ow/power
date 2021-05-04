@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>Power : Le jeu</title>
+    </head>
+    <body>
+        <div class="table">
+
+            <!-- Réserves -->
+            <div class="vrv rv">
+                <h2>Réserve verte</h2>
+                <input [(ngModel)]="x">
+                <input [(ngModel)]="y">
+                <input [(ngModel)]="transla">
+            </div>
+            <div class="brv rv">
+                <h2>Réserve bleue</h2>
+            </div>
+            <div class="jrv rv">
+                <h2>Réserve jaune</h2>
+            </div>
+            <div class="rrv rv">
+                <h2>Réserve rouge</h2>
+            </div>
+
+            <!-- Admin -->
+            <div class="ordres">
+                <h2>Ordres de <strong 
+                    [class.green]="roue == 1"
+                    [class.blue]="roue == 2"
+                    [class.yellow]="roue == 3"
+                    [class.red]="roue == 4"
+                    *ngFor="let item of ordres$ | async">{{item.nom}}</strong></h2>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Pièce</th>
+                            <th>Départ</th>
+                            <th>Arrivée</th>
+                            <th>Validation</th>
+                        </tr>
+                        <tr *ngFor="let item of ordres$ | async; let i = index" [class.green]="estValide(i+1,roue-1) == true">
+                            <td>{{item.a || '-' | uppercase}}</td>
+                            <td>{{item.b || '-' | uppercase}}</td>
+                            <td>{{item.c || '-' | uppercase}}</td>
+                            <td>
+                                <button mat-icon-button color="primary" (click)="validateur(i+1,roue-1)" (click)="validerOrdre(i+1, roue-1)" [disabled]="estValide(i+1,roue-1) == true">
+                                    <mat-icon>check</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="boutons">
+                    <button [disabled]="roue == 1" mat-raised-button color="primary" (click)="prev()" (click)="onFetch()">
+                        <mat-icon>skip_previous</mat-icon>
+                    </button>
+                    <button mat-raised-button color="primary" (click)="onFetch()">Récupérer les ordres</button>
+                    <button [disabled]="roue == 4" mat-raised-button color="primary" (click)="next()" (click)="onFetch()">
+                        <mat-icon>skip_next</mat-icon>
+                    </button>
+                </div>
+                <div class="boutons">
+                    <button mat-raised-button color="warn" (click)="reset()">Tour suivant</button>
+                </div>
+            </div>
+
+
+            <div class="log">
+                <h2>Logs</h2>
+                <div class="logOrdres">
+                    <table>
+                        <tr>
+                            <th>Pièce</th>
+                            <th>Départ</th>
+                            <th>Arrivée</th>
+                            <th>Couleur</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" [ngModel]="ordrea | uppercase " (ngModelChange)="ordrea=$event"></td>
+                            <td><input type="text" [ngModel]="ordreb | uppercase " (ngModelChange)="ordreb=$event"></td>
+                            <td><input type="text" [ngModel]="ordrec | uppercase " (ngModelChange)="ordrec=$event"></td>
+                            <td><input type="text" [ngModel]="ordred | uppercase " (ngModelChange)="ordred=$event"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="boutons">
+                    <button mat-raised-button color="primary" (click)="envoyerOrdre()">Envoyer</button>
+                    <button mat-raised-button color="accent" (click)="refreshLogs()">
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button mat-raised-button color="warn" (click)="deleteLogs()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-raised-button color="warn" (click)="nouvellePartie()">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+                <div class="logContainer">
+                    <table>
+                        <tr *ngFor="let log of logs$ | async">
+                            <td
+                            [class.green]="log[1] == 'Vert'"
+                            [class.blue]="log[1] == 'Bleu'"
+                            [class.yellow]="log[1] == 'Jaune'"
+                            [class.red]="log[1] == 'Rouge'"
+                            [class.grey]="log[1] == 'Gris'">{{log[0]}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Plateau -->
+
+            <div class="plateau">
+                <div class="grille">
+                    <div class="pieces">
+                        <div id="piece{{i}}" class="piece" *ngFor="let piece of pieces; let i = index"
+                            matBadge="{{pieces[i][3]}}" [matBadgeHidden]="pieces[i][3] == 1"
+                            [class.red]="pieces[i][1] == 'Rouge'"
+                            [class.green]="pieces[i][1] == 'Vert'"
+                            [class.blue]="pieces[i][1] == 'Bleu'"
+                            [class.yellow]="pieces[i][1] == 'Jaune'"
+                            (click)="updateCase(pieces[i][2])"
+                            >
+                            <mat-icon *ngIf="pieces[i][0] == 'Tank'">drive_eta</mat-icon>
+                            <mat-icon *ngIf="pieces[i][0] == 'Chasseur'">navigation</mat-icon>
+                            <mat-icon *ngIf="pieces[i][0] == 'Soldat'">directions_run</mat-icon>
+                            <mat-icon *ngIf="pieces[i][0] == 'Destroyer'">rowing</mat-icon>
+                            
+                            <mat-icon *ngIf="pieces[i][0] == 'Char d\'Assaut'">directions_bus</mat-icon>
+                            <mat-icon *ngIf="pieces[i][0] == 'Bombardier'">flight</mat-icon>
+                            <mat-icon *ngIf="pieces[i][0] == 'Régiment'">group</mat-icon>
+                            <mat-icon *ngIf="pieces[i][0] == 'Croiseur'">directions_boat</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    <!-- style="top: calc({{y}}% - .42px * {{y}}); left: calc({{x}}% - .42px * {{x}});transform: rotate(calc(23deg*{{i}})) translateX({{transla}}px) rotate(calc(-23deg*{{i}}));" -->
