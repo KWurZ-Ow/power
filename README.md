@@ -8,7 +8,7 @@ https://kwurz-ow.github.io/power/
 
 ## 🪂 Le jeu
 
-<img src="https://escaleajeux.fr/p/powe2.jpg" alt="Image du jeu Power" width="400"/>
+<img src="https://escaleajeux.fr/p/powe2.jpg" width="400"/>
 
 ***
 
@@ -34,9 +34,9 @@ L'interface est codée en `html` et `css` brut.
 J'utilise `Angular Matérial` pour les boutons, les formulaires et plein d'autres designs
 
 ### Plateau de jeu : 
-<img src="https://raw.githubusercontent.com/KWurZ-Ow/power/gh-pages/illustration_plateau.png" alt="Image du jeu Power" width="400"/>
+<img src="https://raw.githubusercontent.com/KWurZ-Ow/power/gh-pages/illustration_plateau.png" width="400"/>
 
 ***
 
 ### Interface mobile : 
-<img src="https://raw.githubusercontent.com/KWurZ-Ow/power/gh-pages/illustration_tel.png" alt="Image du jeu Power" width="300"/>
+<img src="https://raw.githubusercontent.com/KWurZ-Ow/power/gh-pages/illustration_tel.png" width="300"/>
