@@ -1,7 +1,7 @@
 # ⚡ Projet Angular Power
 
-⚠ **projet en développement** ⚠
-<ins>text</ins>
+⚠<ins> **projet en développement** </ins>⚠
+
 Lien vers le site :
 https://kwurz-ow.github.io/power/
 
