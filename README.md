@@ -42,4 +42,4 @@ L'interface est codée en html css brut et avec angular matérial pour les bouto
 ***
 
 ### Interface mobile : 
-<img src="https://raw.githubusercontent.com/KWurZ-Ow/power/gh-pages/illustration_tel.png" alt="Image du jeu Power" width="200"/>
+<img src="https://raw.githubusercontent.com/KWurZ-Ow/power/gh-pages/illustration_tel.png" alt="Image du jeu Power" width="300"/>
