@@ -36,6 +36,7 @@ On résout les combats éventuels et on lance une nouvelle manche.
 
 L'interface est codée en html css brut et avec angular matérial
 <div style="display: flex;">
+
 ### Plateau de jeu : 
 <img src="https://raw.githubusercontent.com/KWurZ-Ow/power/gh-pages/illustration_plateau.png" alt="Image du jeu Power" width="400"/>
 
